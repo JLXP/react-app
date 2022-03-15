@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { BrowserRouter} from 'react-router-dom';
-import { Routes, Route,  Navigate, NavLink } from 'react-router-dom';
+import { Routes, Route, Navigate, NavLink } from 'react-router-dom';
 import { routes } from './routes';
 //import { LazyPage1, LazyPage2, LazyPage3 } from '../01-lazyload/pages';
 import logo from '../logo.svg';
