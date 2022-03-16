@@ -1,4 +1,3 @@
-import styles from '../styles/styles.module.css';
 import ProductCard from "../components/ProductCard"
 
 const ShoppingPage = () => {
