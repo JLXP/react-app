@@ -1,9 +1,8 @@
 
-import { ReactElement } from "react";
-export interface ProductCardProps{
-    product: Product;
-    children?: ReactElement | ReactElement[];
-}
+import { Props as ProductCardProps} from '../components/ProductCard'
+import { Props as ProductImageProps } from '../components/ProductImage';
+import { Props as ProductTitleProps } from '../components/ProductTitle';
+import { Props as ProductButtonsProps } from '../components/ProductButtons';
 
 export interface Product{
     id: string;
@@ -12,6 +11,7 @@ export interface Product{
 }
 
   //esta es la informacion que recibe el context
+  //Esto es lo que hace de manera global para pueda ser consultada
 export interface ProductContextProps {
     counter:number;
     increaseBy: (value:number) => void;
@@ -19,8 +19,11 @@ export interface ProductContextProps {
 }
 
 export interface ProductCardHOCProps {
+    /*No es importante si no esta recibiendo el classname
+    los recibe directo de los componentes
+    */ 
     ({ children, product }: ProductCardProps):JSX.Element,
-    Title: ({ title }: {title?: string | undefined;}) => JSX.Element,
-    Image:({ img }: {img?: string | undefined;}) => JSX.Element,
-    Buttons: () => JSX.Element
+    Title: (Props : ProductTitleProps) => JSX.Element,
+    Image:(Props: ProductImageProps) => JSX.Element,
+    Buttons: (Props:ProductButtonsProps) => JSX.Element
 }

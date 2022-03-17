@@ -1,22 +1,29 @@
-import { createContext} from 'react';
-import { ProductCardProps, ProductContextProps } from '../interfaces/interfaces';
+import { createContext } from 'react';
+import {  Product, ProductContextProps } from '../interfaces/interfaces';
 import { useProduct } from '../hooks/useProduct';
 import styles from '../styles/styles.module.css';
 
 
-
-
-
-/*Esto se hace por que en el props podemos enviarle muchas mas cosas
-  si no lo hacemos asi lo que pasara es que solo podemos consultar props
-*/
-//Esto es lo que recibe desde el padre
-
 //Se importa desde interfaces por que solamente se va a usar en la parte de product card
 export const ProductContext = createContext({} as ProductContextProps);
+
+/* Siempre se extrae el provider y este despues envuelve al div para 
+que la informacion pueda ser consultada
+*/
 const { Provider } = ProductContext;
 
-export const ProductCard = ({children,product}:ProductCardProps) => {
+/* Esta interface se encuentra aqui por que es mejor tener la principal en el componente */
+export interface Props{
+  product: Product;
+  //el children es toda la lista de componentes
+  children?: React.ReactElement | React.ReactElement[];
+  //lo unico que se utilizo para usar los estilos fue el className
+  className?: string;
+  //esta parte del style es para poder agregar estilos
+  style?: React.CSSProperties;
+}
+
+export const ProductCard = ({children,product,className,style}:Props) => {
   
   const { counter, increaseBy} = useProduct();
 
@@ -28,22 +35,14 @@ export const ProductCard = ({children,product}:ProductCardProps) => {
       increaseBy,
       product
     }}>
-      <div className={styles.productCard}>
-        {children}   
+      <div 
+      className={`${ styles.productCard} ${className}`}
+      style={style}
+      >
         {/* Se separo todo en pequeños components */}
-        {/*<ProductImage img={product.img}/>
-            <ProductTitle title={product.title}/>
-            <ProductButtons 
-            increaseBy={increaseBy}
-            counter={counter}
-        />*/}
+        {children}   
+        
       </div>
     </Provider>
   )
 }
- 
-/*Esto se hace con el fin de ya no meter todas las clases de forma sencilla
-sino de que parezcan que son hijas*/
-/*ProductCard.Title = ProductTitle;
-ProductCard.Image = ProductImage;
-ProductCard.Buttons = ProductButtons;*/
