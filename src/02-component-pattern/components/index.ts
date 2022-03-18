@@ -10,7 +10,7 @@ export { ProductTitle } from "./ProductTitle";
 export { ProductImage } from "./ProductImage";
 
 
-
+//Estas son las importaciones de todos los componentes, despues lo que se encarga es validar con la interfaz
 export const ProductCard:ProductCardHOCProps = Object.assign( ProductCardHOC,{
     Title: ProductTitle,
     Image: ProductImage,

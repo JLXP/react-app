@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import {  Product, ProductContextProps } from '../interfaces/interfaces';
+import {  onChangeArgs, Product, ProductContextProps } from '../interfaces/interfaces';
 import { useProduct } from '../hooks/useProduct';
 import styles from '../styles/styles.module.css';
 
@@ -21,11 +21,13 @@ export interface Props{
   className?: string;
   //esta parte del style es para poder agregar estilos
   style?: React.CSSProperties;
+
+  onChange?: ( args: onChangeArgs) => void;
 }
 
-export const ProductCard = ({children,product,className,style}:Props) => {
+export const ProductCard = ({children,product,className,style, onChange}:Props) => {
   
-  const { counter, increaseBy} = useProduct();
+  const { counter, increaseBy} = useProduct({onChange, product});
 
   /*Se declara el provider para que posteriormente este pueda compartir la informacion
   con todos los hijo*/
