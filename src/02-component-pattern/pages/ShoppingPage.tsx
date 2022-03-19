@@ -32,12 +32,30 @@ const ShoppingPage = () => {
   */
  //Maneja un objeto y dentro x cantidad de llaves y los valores de ese objeto 
  //lucen tipo Product in Cart
-  type cart = {[key:string | number]: ProductInCart}
+  type cart = {[key: string | number]: ProductInCart}
     
-  const [shoppingCart, setShoppingCart] = useState< cart >();
+  //aqui recibe un arreglo del tipo cart 
+  const [shoppingCart, setShoppingCart] = useState< cart >({});
 
   const onProductCountChange = ({count, product}:{count:number, product:Product}) => {
-    console.log('prueb');
+    console.log('onProductCountChange',count, product);
+
+    setShoppingCart( oldShoppingCart => {
+
+      if( count === 0 ){
+
+        //El rest es todo lo que sobra, en pocas palabras es todo el state pero sin uno menos
+        const { [product.id] : toDelete,...rest } = oldShoppingCart;
+        console.log({toDelete});
+
+        return rest;
+      }
+
+      return {
+        ...oldShoppingCart,
+        [product.id]: {...product, count}
+      }
+    })
   }
 
   return (
@@ -56,7 +74,7 @@ const ShoppingPage = () => {
               key={product.id} 
               product={ product } 
               className="bg-dark"
-              onChange={(evento)=>onProductCountChange(evento)}>
+              onChange={onProductCountChange}>
                   <ProductImage className="custom-image"/>
                   <ProductTitle className="text-white text-bold"/>
                   <ProductButtons className="custom-buttons"/>
@@ -78,21 +96,26 @@ const ShoppingPage = () => {
           <ProductCard product={ product2 } className="bg-dark" style={{
             width:'100px'       
           }}
-          onChange={(evento)=>onProductCountChange(evento)}
+          onChange={onProductCountChange}
           >
             <ProductImage className="custom-image"/>
           
-            <ProductButtons className="custom-buttons"/>
+            <ProductButtons className="custom-buttons"
+            style={{
+              display: 'flex',
+              justifyContent:'center'
+            }}
+            />
           </ProductCard>
 
-          <ProductCard product={ product1 } className="bg-dark" style={{
-            width:'100px'
-          }}>
-            <ProductImage className="custom-image"/>
+
           
-            <ProductButtons className="custom-buttons"/>
-          </ProductCard>
-          
+        </div>
+
+        <div>
+          <code>
+            {JSON.stringify(shoppingCart,null,5)}
+          </code>
         </div>
     </div>
     
