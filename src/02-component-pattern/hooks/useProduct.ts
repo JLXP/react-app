@@ -15,7 +15,7 @@ export const useProduct = ({onChange, product}: useProductArgs) =>{
   //aqui ya entra la parte de typescript en donde limitamos y le decimos que valor 
   //quiere por defecto
   const increaseBy = ( value:number )=> {
-
+      // El valor prev es un valor que se tenia
       const newValue = Math.max(counter + value,0);
 
       setCounter( newValue );

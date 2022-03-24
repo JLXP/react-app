@@ -3,7 +3,7 @@ import  { ProductCard,ProductButtons, ProductImage, ProductTitle } from "../comp
 import { Product } from "../interfaces/interfaces";
 import '../styles/custom-styles.css';
 
-//Estos son los productos
+//Estos son los productos y despues se pasan a un arreglo de productos
 const product1 = {
     id:'1',
     title:' Coffe Mug - Card',
@@ -18,9 +18,8 @@ const product2 = {
 
 }
 
-//array de productos
+//array de productos, se ha
 const products: Product[] = [ product1,product2 ];
-
 
 interface ProductInCart extends Product{
   count:number
@@ -43,14 +42,11 @@ const ShoppingPage = () => {
     setShoppingCart( oldShoppingCart => {
 
       if( count === 0 ){
-
         //El rest es todo lo que sobra, en pocas palabras es todo el state pero sin uno menos
         const { [product.id] : toDelete,...rest } = oldShoppingCart;
         console.log({toDelete});
-
         return rest;
       }
-
       return {
         ...oldShoppingCart,
         [product.id]: {...product, count}
@@ -90,9 +86,7 @@ const ShoppingPage = () => {
             <ProductCard.Buttons className="custom-buttons"/>
         </ProductCard>*/}       
         </div>
-
         <div className="shopping-cart">
-
           <ProductCard product={ product2 } className="bg-dark" style={{
             width:'100px'       
           }}
@@ -107,11 +101,8 @@ const ShoppingPage = () => {
             }}
             />
           </ProductCard>
-
-
           
         </div>
-
         <div>
           <code>
             {JSON.stringify(shoppingCart,null,5)}

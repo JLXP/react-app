@@ -6,40 +6,39 @@ import { routes } from './routes';
 import logo from '../logo.svg';
 import ShoppingPage from '../02-component-pattern/pages/ShoppingPage';
 
-
-
-
 //Navlink sirve para ver agregar la opcion active
 export const Navigation = () => {
     //el suspense es un componente que va a envolver a todo el browserRouter
     //el suspense sirve para decirle a react que cuando estoy cargando a un modulo, espera pero haz
     //lo siguiente
   return (
+    //React Router 6
     <BrowserRouter>
-    <div className="main-layout">
-        <nav>
-            <img src={ logo } alt="React Logo" />
-            <ul>
-                <li>
-                    <NavLink to="/home" className={ ({ isActive }) => isActive ? 'nav-active' : '' }>ShoppingPage</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/about" className={ ({ isActive }) => isActive ? 'nav-active' : '' }>About</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/users" className={ ({ isActive }) => isActive ? 'nav-active' : '' }>Users</NavLink>
-                </li>
-            </ul>
-        </nav>
+        <div className="main-layout">
+            <nav>
+                <img src={ logo } alt="React Logo" />
+                <ul>
+                    <li>
+                        {/* La diferencia entre el navlink y el link es que el navlink sirve para poder hacer el active */}
+                        <NavLink to="/home" className={ ({ isActive }) => isActive ? 'nav-active' : '' }>ShoppingPage</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/about" className={ ({ isActive }) => isActive ? 'nav-active' : '' }>About</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/users" className={ ({ isActive }) => isActive ? 'nav-active' : '' }>Users</NavLink>
+                    </li>
+                </ul>
+            </nav>
 
-
-        <Routes>
-            <Route path="about" element={ <h1>About Page</h1> } />
-            <Route path="users" element={ <h1>Users Page</h1> } />
-            <Route path="home" element={ <ShoppingPage/> } />
-            
-            <Route path="/*" element={ <Navigate to="/home" replace /> } />
-        </Routes>
+            {/* Estos son los links que serviran para poder trasladarse entre las paginas  */}
+            <Routes>
+                <Route path="about" element={ <h1>About Page</h1> } />
+                <Route path="users" element={ <h1>Users Page</h1> } />
+                <Route path="home" element={ <ShoppingPage/> } />
+                
+                <Route path="/*" element={ <Navigate to="/home" replace /> } />
+            </Routes>
 
         </div>
     </BrowserRouter>

@@ -27,6 +27,8 @@ export interface Props{
 
 export const ProductCard = ({children,product,className,style, onChange}:Props) => {
   
+  /*Cuando realizamos una devolucion de datos siempre retornamos
+  la funcion y el resultado*/
   const { counter, increaseBy} = useProduct({onChange, product});
 
   /*Se declara el provider para que posteriormente este pueda compartir la informacion
